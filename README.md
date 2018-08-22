@@ -1,3 +1,5 @@
-# 剑指 Offer 的 Python 实现
+# target-offer
 
-Copy&Paste-Oriented Programming.
+My Python solutions for *剑指 Offer*. 
+
+Copy&Paste-Oriented Programming™ 🎉
