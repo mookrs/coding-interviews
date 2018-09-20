@@ -1,5 +1,9 @@
 def number_of_1(n):
     count = 0
+    if n < 0:
+        count += 1
+        n = n & 0x7FFFFFFF
+
     while n:
         count += 1
         n = n & (n - 1)
