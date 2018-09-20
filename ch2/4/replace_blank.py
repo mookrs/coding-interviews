@@ -14,11 +14,10 @@ def replace_space(s):
         if s[index_of_original] == ' ':
             new_str[index_of_new - 2:index_of_new + 1] = ['%', '2', '0']
             index_of_new -= 3
-            index_of_original -= 1
         else:
             new_str[index_of_new] = s[index_of_original]
             index_of_new -= 1
-            index_of_original -= 1
+        index_of_original -= 1
     return ''.join(new_str)
 
 

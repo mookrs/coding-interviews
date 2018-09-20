@@ -8,7 +8,7 @@ class TreeNode:
         self.right = None
 
 
-class Tree(object):
+class Tree:
     def __init__(self):
         self.root = None
 
