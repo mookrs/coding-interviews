@@ -11,6 +11,7 @@ def delete_node(list_head, to_be_deleted):
         to_be_deleted.next = next_node.next
         del next_node
     elif list_head == to_be_deleted:
+        # 链表只有一个节点
         del to_be_deleted
     else:
         node = list_head
