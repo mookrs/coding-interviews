@@ -1,9 +1,9 @@
 def reorder(nums, func):
     left, right = 0, len(nums) - 1
     while left < right:
-        while not func(nums[left]):
+        while left < right and not func(nums[left]):
             left += 1
-        while func(nums[right]):
+        while left < right and func(nums[right]):
             right -= 1
         if left < right:
             nums[left], nums[right] = nums[right], nums[left]
