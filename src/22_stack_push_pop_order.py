@@ -1,4 +1,4 @@
-def stack_push_pop_order(push_stack, pop_stack):
+def is_pop_order(push_stack, pop_stack):
     if not push_stack or not pop_stack:
         return False
 
