@@ -1,4 +1,4 @@
-# target-offer
+# coding-interviews
 
 My Python solutions for *剑指 Offer*. 
 
