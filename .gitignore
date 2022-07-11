@@ -1,4 +1,9 @@
 .DS_Store
 
+__pycache__/
+*.py[cod]
+
+.pytest_cache/
+
 .pdm.toml
 __pypackages__/
