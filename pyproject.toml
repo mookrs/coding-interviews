@@ -1,22 +1,19 @@
 [project]
-name = "coding_interviews"
+name = "coding-interviews"
 version = "0.0.1"
-dependencies = []
-authors = [
-    {name = "mookrs"}
-]
-requires-python = ">=3.10"
 license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = []
 
 [project.optional-dependencies]
 
-[tool.pdm]
 [tool.pdm.dev-dependencies]
+dev = [
+    "isort>=5.10.1",
+    "black>=22.6.0",
+]
 test = [
     "pytest>=7.1.2",
-]
-dev = [
-    "black>=22.6.0",
 ]
 
 [build-system]

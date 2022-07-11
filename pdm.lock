@@ -44,6 +44,12 @@ version = "1.1.1"
 summary = "iniconfig: brain-dead simple config-ini parsing"
 
 [[package]]
+name = "isort"
+version = "5.10.1"
+requires_python = ">=3.6.1,<4.0"
+summary = "A Python utility / library to sort Python imports."
+
+[[package]]
 name = "mypy-extensions"
 version = "0.4.3"
 summary = "Experimental type system extensions for programs checked with the mypy typechecker."
@@ -111,7 +117,7 @@ summary = "A lil' TOML parser"
 
 [metadata]
 lock_version = "3.1"
-content_hash = "sha256:0b4cb81e4250237a856482c96e3a708c821b4eb2e8a7f3c91416bc2bc4856598"
+content_hash = "sha256:0ede3b1c70553a3df3a763c61c8a1f4d757a04271f309a2397f1b64f5fe67c8f"
 
 [metadata.files]
 "atomicwrites 1.4.1" = [
@@ -157,6 +163,10 @@ content_hash = "sha256:0b4cb81e4250237a856482c96e3a708c821b4eb2e8a7f3c91416bc2bc
 "iniconfig 1.1.1" = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
+]
+"isort 5.10.1" = [
+    {file = "isort-5.10.1-py3-none-any.whl", hash = "sha256:6f62d78e2f89b4500b080fe3a81690850cd254227f27f75c3a0c491a1f351ba7"},
+    {file = "isort-5.10.1.tar.gz", hash = "sha256:e8443a5e7a020e9d7f97f1d7d9cd17c88bcb3bc7e218bf9cf5095fe550be2951"},
 ]
 "mypy-extensions 0.4.3" = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
