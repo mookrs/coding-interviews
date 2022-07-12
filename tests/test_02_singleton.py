@@ -1,15 +1,10 @@
 import concurrent
+import threading
 import time
 
 import pytest
 
-from coding_interviews.p_02_singleton import (
-    Singleton1,
-    Singleton3,
-    Singleton3RaceCondition,
-    Singleton4,
-    singleton2,
-)
+from coding_interviews.p_02_singleton import Singleton1, Singleton3, singleton2
 
 
 class Singleton1Child1(Singleton1):
@@ -42,7 +37,6 @@ class Singleton2:
 
 
 # "With a metaclass, it will only be called once, when the only instance is created."
-# This is the best one except importing module.
 # ref: https://stackoverflow.com/questions/6760685/creating-a-singleton-in-python
 class Singleton3UsingMetaclass(metaclass=Singleton3):
     pass
@@ -62,18 +56,41 @@ class Singleton3Child2(Singleton3UsingMetaclass):
         )
 
 
+class Singleton3RaceCondition(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            time.sleep(1)
+            cls._instances[cls] = super().__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
 class Singleton3RaceConditionUsingMetaclass(metaclass=Singleton3RaceCondition):
     pass
 
 
-class Singleton4UsingMetaclass(metaclass=Singleton4):
+class Singleton4NoRaceCondition(type):
+    lock = threading.Lock()
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            time.sleep(1)
+            with cls.lock:
+                if cls not in cls._instances:
+                    cls._instances[cls] = super().__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class Singleton4NoRaceConditionUsingMetaclass(metaclass=Singleton4NoRaceCondition):
     pass
 
 
 def test_singleton1():
     ins1 = Singleton1()
     ins2 = Singleton1()
-    assert ins1 == ins2
+    assert ins1 is ins2
 
     child_ins1 = Singleton1Child1()
     child_ins2 = Singleton1Child1()
@@ -110,13 +127,19 @@ def test_singleton3():
     assert child_ins1 is not child_ins3
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = [executor.submit(Singleton3RaceConditionUsingMetaclass) for _ in range(2)]
+        futures = [
+            executor.submit(Singleton3RaceConditionUsingMetaclass) for _ in range(2)
+        ]
     instances = [f.result() for f in futures]
+    print([id(ins) for ins in instances])
     assert any(ins is not instances[0] for ins in instances)
 
 
 def test_singleton4():
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = [executor.submit(Singleton4UsingMetaclass) for _ in range(2)]
+        futures = [
+            executor.submit(Singleton4NoRaceConditionUsingMetaclass) for _ in range(2)
+        ]
     instances = [f.result() for f in futures]
+    print([id(ins) for ins in instances])
     assert all(ins is instances[0] for ins in instances)
