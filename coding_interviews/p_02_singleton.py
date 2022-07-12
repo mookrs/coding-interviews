@@ -1,5 +1,6 @@
-# All these versions have race condition problems.
 # See also: https://python-patterns.guide/gang-of-four/singleton/
+import threading
+import time
 from functools import wraps
 
 
@@ -30,4 +31,26 @@ class Singleton3(type):
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
             cls._instances[cls] = super().__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class Singleton3RaceCondition(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            time.sleep(1)
+            cls._instances[cls] = super().__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class Singleton4(type):
+    lock = threading.Lock()
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            with cls.lock:
+                if cls not in cls._instances:
+                    cls._instances[cls] = super().__call__(*args, **kwargs)
         return cls._instances[cls]
