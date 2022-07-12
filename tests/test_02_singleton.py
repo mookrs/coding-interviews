@@ -70,6 +70,7 @@ class Singleton3RaceConditionUsingMetaclass(metaclass=Singleton3RaceCondition):
     pass
 
 
+# Singleton4 using metaclass is the best one except importing module.
 class Singleton4NoRaceCondition(type):
     lock = threading.Lock()
     _instances = {}
